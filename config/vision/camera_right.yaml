@@ -1,0 +1,14 @@
+camera_right:
+  image_width: 1440
+  image_height: 1080
+  pixel_format: bgr8
+  camera_info_url: 'file:///home/dynamicx/.ros/camera_info/camera_right.yaml'
+  camera_name: camera_right
+  camera_frame_id: camera_optical_frame
+  frame_id: right_camera_optical_frame
+  camera_sn: 00L28498180
+  frame_rate: 1000
+  exposure_auto: false
+  exposure_value: 1600
+  enable_imu_trigger: false
+  sleep_time: 15

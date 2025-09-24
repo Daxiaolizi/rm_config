@@ -21,7 +21,7 @@ rm_referee:
         config: { type: "int_num", start_position: [ 1190, 650 ], size: 20, width: 2 ,color: "yellow" }
     time_change:
       - name: "bullet"
-        config: { type: "int_num", start_position: [ 170, 560 ], size: 30, width: 3 , delay: 0.4 }
+        config: { type: "int_num", start_position: [ 170, 560 ], size: 30, width: 3 , delay: 0.05 }
       - name: "capacitor"
         config: { type: "line", width: 5, delay: 0.2,
                   start_position: [ 610, 100 ], end_position: [ 1210, 100 ] }

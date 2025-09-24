@@ -3,6 +3,6 @@
 
     <rosparam file="$(find rm_config)/config/rm_referee/$(arg robot_type).yaml" command="load"/>
 
-    <node name="rm_referee" pkg="rm_referee" type="rm_referee" respawn="false"/>
+    <node name="rm_referee" pkg="rm_referee" type="rm_referee" respawn="true"/>
 
 </launch>

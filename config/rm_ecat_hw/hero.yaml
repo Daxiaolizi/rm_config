@@ -12,3 +12,4 @@ ethercat_devices:
     configuration_file: device_configurations/hero_gimbal.yaml
     ethercat_bus: enp89s0
     ethercat_address: 2
+

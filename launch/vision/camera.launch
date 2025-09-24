@@ -1,25 +1,95 @@
 <launch>
     <arg name="imu_trigger" default="false"/>
+
     <arg name="camera_type" default="$(env CAMERA_TYPE)" doc="Camera type"/>
+
     <arg name="camera_class" default="$(env CAMERA_CLASS)"/>
     <arg name="camera_name" default="camera"/>
     <arg name="camera_frame" default="camera_optical_frame"/>
     <arg name="hw_name" default="$(env HW_NAME)" doc="[rm_ecat_hw, rm_hw]"/>
 
-    <rosparam file="$(find rm_config)/config/vision/camera.yaml" command="load"/>
+    <!--    <rosparam file="$(find rm_config)/config/vision/camera.yaml" command="load"/>-->
+    <!--前相机-->
+    <rosparam file="$(find rm_config)/config/vision/camera_front.yaml" command="load"/>
 
-    <node pkg="nodelet" type="nodelet" name="vision_nodelet" args="manager"
+    <node pkg="nodelet" type="nodelet" name="vision_nodelet_front" args="manager"
           output="screen" respawn="true">
-        <param name="num_worker_threads" value="8"/>
+        <param name="num_worker_threads" value="6"/>
     </node>
 
-    <node pkg="nodelet" type="nodelet" name="$(arg camera_name)"
-          args="load $(arg camera_type)/$(arg camera_class) vision_nodelet"
+    <node pkg="nodelet" type="nodelet" name="$(arg camera_front_name)"
+          args="load $(arg camera_type_front)/$(arg camera_class_front) vision_nodelet_front"
           output="screen" respawn="true">
         <param name="camera_frame_id" value="$(arg camera_frame)"/>
         <param name="enable_imu_trigger" value="$(arg imu_trigger)"/>
-        <remap from="$(arg camera_name)/image_raw" to="/$(arg camera_type)/$(arg camera_name)/image_raw"/>
-        <remap from="/$(arg camera_name)/imu_trigger" to="/$(arg hw_name)/imu_trigger"/>
+        <remap from="/$(arg camera_front_name)/image_raw" to="/$(arg camera_front_name)/image_raw"/>
+        <remap from="/$(arg camera_front_name)/imu_trigger" to="/$(arg hw_name)/imu_trigger"/>
         <remap from="/rm_hw/gimbal_imu/trigger_time" to="/$(arg hw_name)/gimbal_imu/trigger_time"/>
     </node>
+    <!--后相机-->
+    <rosparam file="$(find rm_config)/config/vision/camera_back.yaml" command="load"/>
+
+    <node pkg="nodelet" type="nodelet" name="vision_nodelet_back" args="manager"
+          output="screen" respawn="true">
+        <param name="num_worker_threads" value="2"/>
+    </node>
+
+    <node pkg="nodelet" type="nodelet" name="$(arg camera_back_name)"
+          args="load $(arg camera_type_back)/$(arg camera_class_back) vision_nodelet_back"
+          output="screen" respawn="true">
+        <param name="camera_frame_id" value="$(arg camera_frame)"/>
+        <param name="enable_imu_trigger" value="false"/>
+        <param name="frame_rate" value="60.0"/>
+        <remap from="/$(arg camera_back_name)/image_raw" to="/$(arg camera_back_name)/image_raw"/>
+    </node>
+    <!--    左相机-->
+    <rosparam file="$(find rm_config)/config/vision/camera_left.yaml" command="load"/>
+
+    <node pkg="nodelet" type="nodelet" name="vision_nodelet_left" args="manager"
+          output="screen" respawn="true">
+        <param name="num_worker_threads" value="6"/>
+    </node>
+
+    <node pkg="nodelet" type="nodelet" name="$(arg camera_left_name)"
+          args="load $(arg camera_type_left)/$(arg camera_class_left) vision_nodelet_left"
+          output="screen" respawn="true">
+        <param name="camera_frame_id" value="$(arg camera_frame)"/>
+        <param name="enable_imu_trigger" value="false"/>
+        <param name="frame_rate" value="60.0"/>
+        <remap from="/$(arg camera_left_name)/image_raw" to="/$(arg camera_left_name)/image_raw"/>
+    </node>
+
+
+    <!--右相机-->
+    <rosparam file="$(find rm_config)/config/vision/camera_right.yaml" command="load"/>
+
+    <node pkg="nodelet" type="nodelet" name="vision_nodelet_right" args="manager"
+          output="screen" respawn="true">
+        <param name="num_worker_threads" value="6"/>
+    </node>
+
+    <node pkg="nodelet" type="nodelet" name="$(arg camera_right_name)"
+          args="load $(arg camera_type_right)/$(arg camera_class_right) vision_nodelet_right"
+          output="screen" respawn="true">
+        <param name="camera_frame_id" value="$(arg camera_frame)"/>
+        <param name="enable_imu_trigger" value="false"/>
+        <param name="frame_rate" value="60.0"/>
+        <remap from="/$(arg camera_right_name)/image_raw" to="/$(arg camera_right_name)/image_raw"/>
+    </node>
+
+
+    <!--    <node pkg="nodelet" type="nodelet" name="vision_nodelet" args="manager"-->
+    <!--          output="screen" respawn="true">-->
+    <!--        <param name="num_worker_threads" value="8"/>-->
+    <!--    </node>-->
+
+    <!--    <node pkg="nodelet" type="nodelet" name="$(arg camera_name)"-->
+    <!--          args="load $(arg camera_type)/$(arg camera_class) vision_nodelet"-->
+    <!--          output="screen" respawn="true">-->
+    <!--        <param name="camera_frame_id" value="$(arg camera_frame)"/>-->
+    <!--        <param name="enable_imu_trigger" value="$(arg imu_trigger)"/>-->
+    <!--        <remap from="$(arg camera_name)/image_raw" to="/$(arg camera_type)/$(arg camera_name)/image_raw"/>-->
+    <!--        <remap from="/$(arg camera_name)/imu_trigger" to="/$(arg hw_name)/imu_trigger"/>-->
+    <!--        <remap from="/rm_hw/gimbal_imu/trigger_time" to="/$(arg hw_name)/gimbal_imu/trigger_time"/>-->
+    <!--    </node>-->
 </launch>
