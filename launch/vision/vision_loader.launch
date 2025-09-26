@@ -24,7 +24,7 @@
         <rosparam file="$(find rm_digtialimg_proc)/config/preprocess_coefficient.yaml" command="load"/>
         <param name="camera_info_url" value="file:///home/dynamicx/.ros/camera_info/hk_camera.yaml"/>
         <remap from="/processor/result_msg" to="/processor/result_msg_front"/>
-        <!--        <remap from="debug_image" to="debug_image"/>-->
+<!--        <remap from="debug_image" to="debug_image"/>-->
         <remap from="/galaxy_camera/image_raw" to="/$(arg camera_front_name)/image_raw"/>
     </node>
 
@@ -49,7 +49,7 @@
         <rosparam file="$(find rm_digtialimg_proc)/config/preprocess_coefficient.yaml" command="load"/>
         <param name="rotate" type="bool" value="true"/>
         <remap from="/processor/result_msg" to="/processor/result_msg_back"/>
-        <!--        <remap from="debug_image" to="debug_image"/>-->
+<!--        <remap from="debug_image" to="debug_image"/>-->
         <remap from="/galaxy_camera/image_raw" to="/$(arg camera_back_name)/image_raw"/>
     </node>
 
@@ -60,89 +60,81 @@
         <remap from="/detection" to="/detection_back"/>
     </node>
 
-    <!--    <node name="armor_processor_back" pkg="armor_processor" type="armor_processor" respawn="true">-->
-    <!--        <remap from="/detection" to="/detection_back"/>-->
-    <!--        <remap from="/track" to="/track_back"/>-->
-    <!--    </node>-->
+<!--    <node name="armor_processor_back" pkg="armor_processor" type="armor_processor" respawn="true">-->
+<!--        <remap from="/detection" to="/detection_back"/>-->
+<!--        <remap from="/track" to="/track_back"/>-->
+<!--    </node>-->
 
-        <!--左相机-->
-        <node pkg="nodelet" type="nodelet" name="Processor_left"
-              args="load rm_digtialimg_proc/Processor vision_nodelet_left" respawn="true">
-            <rosparam file="$(find rm_digtialimg_proc)/config/weibull_coefficient.yaml" command="load"/>
-            <rosparam file="$(find rm_digtialimg_proc)/config/make_dataset.yaml" command="load"/>
-            <rosparam file="$(find rm_digtialimg_proc)/config/armor_coefficient.yaml" command="load"/>
-            <rosparam file="$(find rm_digtialimg_proc)/config/preprocess_coefficient.yaml" command="load"/>
-            <param name="rotate" type="bool" value="true"/>
-            <remap from="/processor/result_msg" to="/processor/result_msg_left"/>
-    <!--        <remap from="debug_image" to="debug_image_left"/>-->
-            <remap from="/galaxy_camera/image_raw" to="/$(arg camera_left_name)/image_raw"/>
-        </node>
-
-        <node pkg="rm_pose_solver" type="pose_solver_node" name="pose_solver_node_left" output="screen" respawn="true">
-            <rosparam file="$(find rm_pose_solver)/config/pose_solver_config.yaml" command="load"/>
-            <remap from="/processor/result_msg" to="/processor/result_msg_left"/>
-            <remap from="/galaxy_camera/camera_info" to="/$(arg camera_left_name)/camera_info"/>
-            <remap from="/detection" to="/detection_left"/>
-        </node>
-
-<!--        <node name="armor_processor_left" pkg="armor_processor" type="armor_processor" respawn="true">-->
-<!--            <remap from="/detection" to="/detection_left"/>-->
-<!--            <remap from="/track" to="/track_left"/>-->
-<!--        </node>-->
-
-    <!--    &lt;!&ndash;右相机&ndash;&gt;-->
-        <node pkg="nodelet" type="nodelet" name="Processor_right"
-              args="load rm_digtialimg_proc/Processor vision_nodelet_right" respawn="true">
-            <rosparam file="$(find rm_digtialimg_proc)/config/weibull_coefficient.yaml" command="load"/>
-            <rosparam file="$(find rm_digtialimg_proc)/config/make_dataset.yaml" command="load"/>
-            <rosparam file="$(find rm_digtialimg_proc)/config/armor_coefficient.yaml" command="load"/>
-            <rosparam file="$(find rm_digtialimg_proc)/config/preprocess_coefficient.yaml" command="load"/>
-            <param name="rotate" type="bool" value="true"/>
-            <remap from="/processor/result_msg" to="/processor/result_msg_right"/>
-    <!--        <remap from="debug_image" to="debug_image_right"/>-->
-            <remap from="/galaxy_camera/image_raw" to="/$(arg camera_right_name)/image_raw"/>
-        </node>
-
-        <node pkg="rm_pose_solver" type="pose_solver_node" name="pose_solver_node_right" output="screen" respawn="true">
-            <rosparam file="$(find rm_pose_solver)/config/pose_solver_config.yaml" command="load"/>
-            <remap from="/processor/result_msg" to="/processor/result_msg_right"/>
-            <remap from="/galaxy_camera/camera_info" to="/$(arg camera_right_name)/camera_info"/>
-            <remap from="/detection" to="/detection_right"/>
-        </node>
-
-<!--        <node name="armor_processor_right" pkg="armor_processor" type="armor_processor" respawn="true">-->
-<!--            <remap from="/detection" to="/detection_right"/>-->
-<!--            <remap from="/track" to="/track_right"/>-->
-<!--        </node>-->
-
-<!--    <node pkg="nodelet" type="nodelet" name="Processor"-->
-<!--          args="load rm_digtialimg_proc/Processor vision_nodelet" respawn="true">-->
+<!--    &lt;!&ndash;左相机&ndash;&gt;-->
+<!--    <node pkg="nodelet" type="nodelet" name="Processor_left"-->
+<!--          args="load rm_digtialimg_proc/Processor vision_nodelet_left" respawn="true">-->
 <!--        <rosparam file="$(find rm_digtialimg_proc)/config/weibull_coefficient.yaml" command="load"/>-->
 <!--        <rosparam file="$(find rm_digtialimg_proc)/config/make_dataset.yaml" command="load"/>-->
 <!--        <rosparam file="$(find rm_digtialimg_proc)/config/armor_coefficient.yaml" command="load"/>-->
 <!--        <rosparam file="$(find rm_digtialimg_proc)/config/preprocess_coefficient.yaml" command="load"/>-->
-<!--        <remap from="/processor/result_msg" to="/processor/result_msg"/>-->
-<!--        <remap from="debug_image" to="debug_image"/>-->
-<!--        <remap from="/galaxy_camera/image_raw" to="/$(arg camera_type)/$(arg camera_name)/image_raw"/>-->
+<!--        <param name="rotate" type="bool" value="true"/>-->
+<!--        <remap from="/processor/result_msg" to="/processor/result_msg_left"/>-->
+<!--&lt;!&ndash;        <remap from="debug_image" to="debug_image_left"/>&ndash;&gt;-->
+<!--        <remap from="/galaxy_camera/image_raw" to="/$(arg camera_left_name)/image_raw"/>-->
 <!--    </node>-->
 
-<!--    <node pkg="rm_pose_solver" type="pose_solver_node" name="pose_solver_node" output="screen" respawn="true">-->
+<!--    <node pkg="rm_pose_solver" type="pose_solver_node" name="pose_solver_node_left" output="screen" respawn="true">-->
 <!--        <rosparam file="$(find rm_pose_solver)/config/pose_solver_config.yaml" command="load"/>-->
-<!--        <remap from="/processor/result_msg" to="/processor/result_msg"/>-->
-<!--        <remap from="/galaxy_camera/camera_info" to="/$(arg camera_type)/$(arg camera_name)/camera_info"/>-->
-<!--        <remap from="/detection" to="/detection"/>-->
+<!--        <remap from="/processor/result_msg" to="/processor/result_msg_left"/>-->
+<!--        <remap from="/galaxy_camera/camera_info" to="/$(arg camera_left_name)/camera_info"/>-->
+<!--        <remap from="/detection" to="/detection_left"/>-->
 <!--    </node>-->
 
-<!--    <node name="armor_processor" pkg="armor_processor" type="armor_processor" respawn="true"/>-->
+<!--    <node name="armor_processor_left" pkg="armor_processor" type="armor_processor" respawn="true">-->
+<!--        <remap from="/detection" to="/detection_left"/>-->
+<!--        <remap from="/track" to="/track_left"/>-->
+<!--    </node>-->
+
+<!--&lt;!&ndash;    &lt;!&ndash;右相机&ndash;&gt;&ndash;&gt;-->
+<!--    <node pkg="nodelet" type="nodelet" name="Processor_right"-->
+<!--          args="load rm_digtialimg_proc/Processor vision_nodelet_right" respawn="true">-->
+<!--        <rosparam file="$(find rm_digtialimg_proc)/config/weibull_coefficient.yaml" command="load"/>-->
+<!--        <rosparam file="$(find rm_digtialimg_proc)/config/make_dataset.yaml" command="load"/>-->
+<!--        <rosparam file="$(find rm_digtialimg_proc)/config/armor_coefficient.yaml" command="load"/>-->
+<!--        <rosparam file="$(find rm_digtialimg_proc)/config/preprocess_coefficient.yaml" command="load"/>-->
+<!--        <param name="rotate" type="bool" value="true"/>-->
+<!--        <remap from="/processor/result_msg" to="/processor/result_msg_right"/>-->
+<!--&lt;!&ndash;        <remap from="debug_image" to="debug_image_right"/>&ndash;&gt;-->
+<!--        <remap from="/galaxy_camera/image_raw" to="/$(arg camera_right_name)/image_raw"/>-->
+<!--    </node>-->
+
+<!--    <node pkg="rm_pose_solver" type="pose_solver_node" name="pose_solver_node_right" output="screen" respawn="true">-->
+<!--        <rosparam file="$(find rm_pose_solver)/config/pose_solver_config.yaml" command="load"/>-->
+<!--        <remap from="/processor/result_msg" to="/processor/result_msg_right"/>-->
+<!--        <remap from="/galaxy_camera/camera_info" to="/$(arg camera_right_name)/camera_info"/>-->
+<!--        <remap from="/detection" to="/detection_right"/>-->
+<!--    </node>-->
+
+<!--    <node name="armor_processor_right" pkg="armor_processor" type="armor_processor" respawn="true">-->
+<!--        <remap from="/detection" to="/detection_right"/>-->
+<!--        <remap from="/track" to="/track_right"/>-->
+<!--    </node>-->
+
+    <node pkg="nodelet" type="nodelet" name="forecast"
+        args="load rm_forecast/Forecast_Node vision_nodelet_front" >
+        <rosparam file="$(find rm_forecast)/config/forecast.yaml" command="load" />
+        <rosparam file="$(find rm_forecast)/config/camera.yaml" command="load" />
+<!--       <remap from="/hk_camera/image_raw" to="/$(arg camera_type)/$(arg camera_name)/image_raw"/> -->
+       <remap from="/hk_camera/image_raw" to="/$(arg camera_front_name)/image_raw"/>
+    </node>
 
 <!--    <node pkg="nodelet" type="nodelet" name="forecast"-->
-<!--        args="load rm_forecast/Forecast_Node vision_nodelet" >-->
-<!--        <rosparam file="$(find rm_forecast)/config/forecast.yaml" command="load" />-->
-<!--        <rosparam file="$(find rm_forecast)/config/camera.yaml" command="load" />-->
-<!--       <remap from="/hk_camera/image_raw" to="/$(arg camera_type)/$(arg camera_name)/image_raw"/>-->
+<!--          args="load fft_forecast/Forecast_Node vision_nodelet_front" respawn="true">-->
+<!--        <rosparam file="$(find fft_forecast)/config/forecast.yaml" command="load" />-->
+<!--        <rosparam file="$(find fft_forecast)/config/camera.yaml" command="load" />-->
+<!--&lt;!&ndash;         <remap from="/hk_camera/image_raw" to="/$(arg camera_type)/$(arg camera_name)/image_raw"/> &ndash;&gt;-->
+<!--&lt;!&ndash;         <remap from="/hk_camera/camera_info" to="/$(arg camera_type)/$(arg camera_name)/camera_info"/> &ndash;&gt;-->
+<!--        <remap from="/hk_camera/image_raw" to="/$(arg camera_front_name)/image_raw"/>-->
+<!--        <remap from="/hk_camera/camera_info" to="/$(arg camera_front_name)/camera_info"/>-->
 <!--    </node>-->
 
-<!--     <include file="$(find buff_vision)/launch/buff_nodelet.launch"/> -->
+<!--    <include file="$(find buff_vision)/launch/buff_nodelet.launch"/> -->
 
-<!--    <include file="$(find windmill)/launch/windmill.launch"/>-->
+        <include file="$(find windmill)/launch/windmill.launch"/>
+
 </launch>

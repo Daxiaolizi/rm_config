@@ -1,14 +1,13 @@
-camera:
-  image_width: 1440
-  image_height: 1080
+camera_back:
+  image_width: 1280
+  image_height: 1024
   pixel_format: bgr8
   camera_info_url: ''
-  camera_name: hk_camera
+  camera_name: galaxy_camera
   camera_frame_id: camera_optical_frame
+  frame_id: back_camera_optical_frame
   camera_sn: KE0220040170
   frame_rate: 1000
   exposure_auto: false
-  exposure_value: 1400
-  gamma_selector: 2
-  gamma_value: 0.5
+  exposure_value: 2000
   enable_imu_trigger: false

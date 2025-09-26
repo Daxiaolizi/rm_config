@@ -3,53 +3,29 @@ rm_manual:
   chassis_calibrate_motor: [ ]
   gimbal_calibrate_motor: [ "left_pitch_joint_motor","right_pitch_joint_motor","yaw_joint_motor" ]
   shooter_calibrate_motor: [ "trigger_joint_motor" ]
-
-  launch_id: [ 26, 23, 24, 25 ]
-  trigger_position: [ 0.003251, 0.008298, 0.014457, 0.018 ]
-
   dart_list:
     first_dart:
-      id: 23
-      param: [ 0.0045, 405.0, -0.0001, 465.0 ]
-      #outpost:offset,qd//base:offset,qd
+      id: 1
+      param: [ 0.0, 404.0, 0.0, 535.0, 0.003251 ]
+      #outpost:offset,qd//base:offset,qd//trigger position
     second_dart:
-      id: 24
-      param: [ 0.004, 408.5, 0.0, 466.5 ]
-      #outpost:offset,qd//base:offset,qd
+      id: 2
+      param: [ 0.003, 405.0, 0.0, 536.0, 0.008298 ]
+      #outpost:offset,qd//base:offset,qd//trigger position
     third_dart:
-      id: 25
-      param: [ 0.005, 398.0, 0.0002, 457.0 ]
-      #outpost:offset,qd//base:offset,qd
+      id: 3
+      param: [ 0.0, 407.0, 0.0, 535.5, 0.014457 ]
+      #outpost:offset,qd//base:offset,qd//trigger position
     fourth_dart:
-      id: 26
-      param: [ 0.0045, 399.5, -0.00025, 458.5 ]
-      #outpost:offset,qd//base:offset,qd
-    fifth_dart:
-      id: 27
-      param: [ 0.007, 400.0, 0.004, 457.5 ]
-      #outpost:offset,qd//base:offset,qd
-    sixth_dart:
-      id: 28
-      param: [ 0.007, 398.0, 0.004, 457.0 ]
-      #outpost:offset,qd//base:offset,qd
-    seventh_dart:
-      id: 29
-      param: [ 0.008, 398.0, 0.00065, 460.0 ]
-      #outpost:offset,qd//base:offset,qd
-    eighth_dart:
-      id: 30
-      param: [ 0.008, 398.0, 0.004, 457.0 ]
-      #outpost:offset,qd//base:offset,qd
+      id: 4
+      param: [ 0.002, 398.0, 0.0, 535.5, 0.018 ]
+      #outpost:offset,qd//base:offset,qd//trigger position
 
   targets:
     outpost:
-      #normal -0.15895, 0.038539
-      #red -0.17029, 0.07431(偏右)
-      #blue -0.16246, 0.061345（四中二）
-      position: [ -0.16246, 0.061345 ] #pitch yaw
+      position: [ -0.15895, 0.038539 ] #pitch yaw
     base:
-      #blue -0.003613, 0.26805
-      position: [ -0.003613, 0.26805 ] #pitch yaw-0.003586, 0.26805
+      position: [ -0.1488, 0.2584 ] #pitch yaw
 
   left_pitch:
     topic: "/controllers/left_pitch_controller/command"

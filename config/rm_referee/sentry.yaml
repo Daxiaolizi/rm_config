@@ -5,4 +5,4 @@ rm_referee:
     - name: "custom_info"
     - name: "sentry_to_radar"
       config: { delay: 0.15 }
-  ui:
+  # ui:

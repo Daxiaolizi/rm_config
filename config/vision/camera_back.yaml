@@ -9,6 +9,6 @@ camera_back:
   camera_sn: DA5510091
   frame_rate: 1000
   exposure_auto: false
-  exposure_value: 1600
+  exposure_value: 2000
   enable_imu_trigger: false
   sleep_time: 5

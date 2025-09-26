@@ -1,9 +1,8 @@
 rm_manual:
   robot_type: "standard"
-  dbus_topic: "/rm_ecat_hw/dbus"
   chassis_calibrate_motor: [ ]
-  gimbal_calibrate_motor: [ ]
-  shooter_calibrate_motor: [ "trigger_joint_motor" ]
+  gimbal_calibrate_motor: [ "pitch_joint_motor" ]
+  shooter_calibrate_motor: [ "cover_joint_motor", "trigger_joint_motor" ]
   chassis:
     topic: "/cmd_chassis"
     accel_x:
@@ -22,29 +21,28 @@ rm_manual:
   vel:
     topic: "/cmd_vel"
     power_limit_topic: "/cmd_chassis"
-    target_vel_yaw_threshold: 3.
     max_linear_x:
       - [ 50.0,2.1 ]
       - [ 80.0,2.8 ]
       - [ 100.0,3.2 ]
-      - [ 220.0,7.0 ]
+      - [ 220.0, 5.0 ]
     max_linear_y:
       - [ 50.0,2.1 ]
       - [ 80.0,2.8 ]
       - [ 100.0,3.2 ]
-      - [ 220.0,7.0 ]
+      - [ 220.0,5.0 ]
     max_angular_z:
       - [ 50.0,10.5 ]
-      - [ 80.0,11.5 ]
-      - [ 100.0,12.0 ]
-      - [ 220.0,15.0 ]
+      - [ 80.0,15.0 ]
+      - [ 100.0,18.0 ]
+      - [ 220.0,20.0 ]
     gyro_move_reduction: 0.4
-    gyro_rotate_reduction: 0.8
+    gyro_rotate_reduction: 0.4
   gimbal:
     topic: "/controllers/gimbal_controller/command"
-    max_yaw_vel: 15.7
-    max_pitch_vel: 8.37
-    gimbal_scale: 8.0
+    max_yaw_vel: 15
+    max_pitch_vel: 15
+    gimbal_scale: 20.0
     track_timeout: 0.5
     finish_turning_threshold: 2.9
     target_cost_function:
@@ -55,8 +53,7 @@ rm_manual:
       timeout: 0.05
   shooter:
     topic: "/controllers/shooter_controller/command"
-    track_armor_error_tolerance: 0.08
-    track_buff_error_tolerance: 0.12
+    gimbal_error_tolerance: 0.05
     target_acceleration_tolerance: 99.
     speed_10m_per_speed: 10.0
     speed_15m_per_speed: 13.5
@@ -65,18 +62,14 @@ rm_manual:
     speed_30m_per_speed: 27.5
     wheel_speed_15: 450.0
     wheel_speed_18: 500.0
-    wheel_speed_30: 790.0
-    extra_wheel_speed_once: 5.0
-    auto_wheel_speed: true
-    speed_oscillation: 1.0
+    wheel_speed_30: 720.0
     heat_limit:
-      low_shoot_frequency: 20
+      low_shoot_frequency: 10
       high_shoot_frequency: 20
       burst_shoot_frequency: 20
       minimal_shoot_frequency: 1.75
-      safe_shoot_frequency: 19
-      heat_coeff: 3.0
-      use_local_heat: false
+      safe_shoot_frequency: 3
+      heat_coeff: 24.0
       type: "ID1_17MM"
   cover:
     topic: "/controllers/cover_controller/command"
@@ -91,9 +84,6 @@ rm_manual:
   detection_switch:
     fail_limit: 10
     service_name: "/Processor/status_switch"
-  exposure_switch:
-    fail_limit: 10
-    service_name: "/exposure_status_switch"
 
   controllers_list:
     state_controllers:
@@ -107,7 +97,22 @@ rm_manual:
       - controllers/cover_controller
     calibration_controllers:
       - controllers/trigger_calibration_controller
+      - controllers/cover_calibration_controller
+      - controllers/gimbal_calibration_controller
 
+  gimbal_calibration:
+    - start_controllers:
+        - controllers/gimbal_calibration_controller
+      stop_controllers:
+        - controllers/gimbal_controller
+      services_name:
+        - /controllers/gimbal_calibration_controller/is_calibrated
+    - start_controllers:
+        - controllers/cover_calibration_controller
+      stop_controllers:
+        - controllers/cover_controller
+      services_name:
+        - /controllers/cover_calibration_controller/is_calibrated
   shooter_calibration:
     - start_controllers:
         - controllers/trigger_calibration_controller

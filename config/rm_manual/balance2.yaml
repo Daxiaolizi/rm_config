@@ -37,7 +37,7 @@ rm_manual:
       - [ 60.0,1.20 ]
       - [ 80.0,1.45 ]
       - [ 100.0,1.70 ]
-      - [ 220.0,2.60 ]
+      - [ 220.0,3.00 ]
     max_linear_y:
       - [ 60.0,1.0 ]
       - [ 80.0,1.3 ]
@@ -46,14 +46,14 @@ rm_manual:
     max_angular_z:
       - [ 60.0,6.5 ]
       - [ 80.0,9.5 ]
-      - [ 180.0,13.0 ]
-    gyro_move_reduction: 0.5
-    gyro_rotate_reduction: 1.0
+      - [ 100.0,13.0 ]
+      - [ 180.0,14.5 ]
+    gyro_move_reduction: 1.0
+    gyro_rotate_reduction: 0.5
   gimbal:
     topic: "/controllers/gimbal_controller/command"
-    max_yaw_vel: 12.56
+    max_yaw_vel: 24.15
     max_pitch_vel: 8.37
-    gimbal_scale: 8
     track_timeout: 0.5
     finish_turning_threshold: 2.9
     target_cost_function:
@@ -64,29 +64,28 @@ rm_manual:
       timeout: 0.05
   shooter:
     topic: "/controllers/shooter_controller/command"
-    track_armor_error_tolerance: 0.08
+    gimbal_error_tolerance: 0.08
     target_acceleration_tolerance: 10
     speed_10m_per_speed: 10.0
     speed_15m_per_speed: 28.0
     speed_16m_per_speed: 16.0
     speed_18m_per_speed: 15.72
     speed_30m_per_speed: 27.5
-    wheel_speed_15: 738.0
-    wheel_speed_18: 738.0
-    wheel_speed_30: 738
-    extra_wheel_speed_once: 5.0
+    wheel_speed_15: 700.0
+    wheel_speed_18: 700.0
+    wheel_speed_30: 690.0
     heat_limit:
       low_shoot_frequency: 10
       high_shoot_frequency: 20
       burst_shoot_frequency: 20
       minimal_shoot_frequency: 1.75
       safe_shoot_frequency: 2.0
-      heat_coeff: 20.0
+      heat_coeff: 15.0
       type: "ID1_17MM"
   cover:
     topic: "/controllers/cover_controller/command"
-    on_pos: -1.460
-    off_pos: -0.02
+    on_pos: -1.469
+    off_pos: -0.0
   detection_switch:
     fail_limit: 10
     service_name: "/Processor/status_switch"
@@ -96,11 +95,11 @@ rm_manual:
       - controllers/joint_state_controller
       - controllers/robot_state_controller
     main_controllers:
-      - controllers/balance_controller
       - controllers/orientation_controller
       - controllers/gimbal_controller
       - controllers/shooter_controller
       - controllers/cover_controller
+      - controllers/balance_controller
     calibration_controllers:
       - controllers/trigger_calibration_controller
       - controllers/cover_calibration_controller
@@ -124,4 +123,4 @@ controllers:
   cover_controller:
     type: effort_controllers/JointPositionController
     joint: "cover_joint"
-    pid: { p: 7.0, i: 0.0, d: 0.5, i_clamp_max: 0.0, i_clamp_min: 0.0, antiwindup: true, publish_state: true }
+    pid: { p: 12.0, i: 0.0, d: 1.0, i_clamp_max: 0.0, i_clamp_min: 0.0, antiwindup: true, publish_state: true }

@@ -1,10 +1,8 @@
 rm_referee:
   robot_type: standard
-  send_ui_queue_delay: 0.035
+  send_ui_queue_delay: 0.15
   add_ui_frequency: 0.5
   add_ui_max_times: 3
-  dbus_topic: "/rm_ecat_hw/dbus"
-  interactive_data:
   ui:
     trigger_change:
       - name: "chassis"
@@ -23,12 +21,12 @@ rm_referee:
         config: { type: "line", width: 5, delay: 0.15,
                   start_position: [ 610, 100 ], end_position: [ 1210, 100 ] }
       - name: "lane_line"
-        config: { type: "line", width: 4, color: "cyan", delay: 0.1,
+        config: { type: "line", width: 4, color: "cyan", delay: 0.15,
                   start_position: [ 800, 1080 ], end_position: [ 800, 600 ] }
         data: { radius: 0.38, height: 0.5, camera_range: 1.0, surface_coefficient: 1.0 }
         reference_frame: "pitch"
       - name: "rotation"
-        config: { type: "arc", width: 4, delay: 0.1, color: "yellow",
+        config: { type: "arc", width: 4, delay: 0.15, color: "yellow",
                   start_position: [ 960, 520 ], end_position: [ 320, 320 ] , start_angle: 60, end_angle: 120 }
         data: { scale: 50, gimbal_reference_frame: "yaw", chassis_reference_frame: "base_link" }
 
