@@ -28,7 +28,7 @@
 
         <node pkg="nodelet" type="nodelet" name="vision_nodelet_front" args="manager"
               output="screen" respawn="true">
-            <param name="num_worker_threads" value="6"/>
+<!--            <param name="num_worker_threads" value="6"/>-->
         </node>
 
         <node pkg="nodelet" type="nodelet" name="$(arg camera_front_name)"
@@ -41,22 +41,22 @@
             <remap from="/rm_hw/gimbal_imu/trigger_time" to="/$(arg hw_name)/gimbal_imu/trigger_time"/>
         </node>
 
-    <!--后相机-->
-        <rosparam file="$(find rm_config)/config/vision/camera_back.yaml" command="load"/>
+<!--    &lt;!&ndash;后相机&ndash;&gt;-->
+<!--        <rosparam file="$(find rm_config)/config/vision/camera_back.yaml" command="load"/>-->
 
-        <node pkg="nodelet" type="nodelet" name="vision_nodelet_back" args="manager"
-              output="screen" respawn="true">
-            <param name="num_worker_threads" value="2"/>
-        </node>
+<!--        <node pkg="nodelet" type="nodelet" name="vision_nodelet_back" args="manager"-->
+<!--              output="screen" respawn="true">-->
+<!--&lt;!&ndash;            <param name="num_worker_threads" value="2"/>&ndash;&gt;-->
+<!--        </node>-->
 
-        <node pkg="nodelet" type="nodelet" name="$(arg camera_back_name)"
-              args="load $(arg camera_type_back)/$(arg camera_class_back) vision_nodelet_back"
-              output="screen" respawn="true">
-            <param name="camera_frame_id" value="$(arg camera_frame)"/>
-            <param name="enable_imu_trigger" value="false"/>
-            <param name="frame_rate" value="60.0"/>
-            <remap from="/$(arg camera_back_name)/image_raw" to="/$(arg camera_back_name)/image_raw"/>
-        </node>
+<!--        <node pkg="nodelet" type="nodelet" name="$(arg camera_back_name)"-->
+<!--              args="load $(arg camera_type_back)/$(arg camera_class_back) vision_nodelet_back"-->
+<!--              output="screen" respawn="true">-->
+<!--            <param name="camera_frame_id" value="$(arg camera_frame)"/>-->
+<!--            <param name="enable_imu_trigger" value="false"/>-->
+<!--            <param name="frame_rate" value="23.0"/>-->
+<!--            <remap from="/$(arg camera_back_name)/image_raw" to="/$(arg camera_back_name)/image_raw"/>-->
+<!--        </node>-->
 
 <!--&lt;!&ndash;    左相机&ndash;&gt;-->
 <!--        <rosparam file="$(find rm_config)/config/vision/camera_left.yaml" command="load"/>-->
@@ -71,26 +71,26 @@
 <!--              output="screen" respawn="true">-->
 <!--            <param name="camera_frame_id" value="$(arg camera_frame)"/>-->
 <!--            <param name="enable_imu_trigger" value="false"/>-->
-<!--            <param name="frame_rate" value="60.0"/>-->
+<!--            <param name="frame_rate" value="30.0"/>-->
 <!--            <remap from="/$(arg camera_left_name)/image_raw" to="/$(arg camera_left_name)/image_raw"/>-->
 <!--        </node>-->
 
 
-<!--    &lt;!&ndash;右相机&ndash;&gt;-->
-<!--        <rosparam file="$(find rm_config)/config/vision/camera_right.yaml" command="load"/>-->
+    <!--右相机-->
+        <rosparam file="$(find rm_config)/config/vision/camera_right.yaml" command="load"/>
 
-<!--        <node pkg="nodelet" type="nodelet" name="vision_nodelet_right" args="manager"-->
-<!--              output="screen" respawn="true">-->
+        <node pkg="nodelet" type="nodelet" name="vision_nodelet_right" args="manager"
+              output="screen" respawn="true">
 <!--            <param name="num_worker_threads" value="6"/>-->
-<!--        </node>-->
+        </node>
 
-<!--        <node pkg="nodelet" type="nodelet" name="$(arg camera_right_name)"-->
-<!--              args="load $(arg camera_type_right)/$(arg camera_class_right) vision_nodelet_right"-->
-<!--              output="screen" respawn="true">-->
-<!--            <param name="camera_frame_id" value="$(arg camera_frame)"/>-->
-<!--            <param name="enable_imu_trigger" value="false"/>-->
-<!--            <param name="frame_rate" value="60.0"/>-->
-<!--            <remap from="/$(arg camera_right_name)/image_raw" to="/$(arg camera_right_name)/image_raw"/>-->
-<!--        </node>-->
+        <node pkg="nodelet" type="nodelet" name="$(arg camera_right_name)"
+              args="load $(arg camera_type_right)/$(arg camera_class_right) vision_nodelet_right"
+              output="screen" respawn="true">
+            <param name="camera_frame_id" value="$(arg camera_frame)"/>
+            <param name="enable_imu_trigger" value="false"/>
+            <param name="frame_rate" value="30.0"/>
+            <remap from="/$(arg camera_right_name)/image_raw" to="/$(arg camera_right_name)/image_raw"/>
+        </node>
 
 </launch>

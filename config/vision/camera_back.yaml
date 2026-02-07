@@ -6,7 +6,7 @@ camera_back:
   camera_name: camera_back
   camera_frame_id: camera_optical_frame
   frame_id: back_camera_optical_frame
-  camera_sn: DA5510091
+  camera_sn: 00J67375789
   frame_rate: 1000
   exposure_auto: false
   exposure_value: 2000

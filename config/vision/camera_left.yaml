@@ -6,7 +6,7 @@ camera_left:
   camera_name: camera_left
   camera_frame_id: camera_optical_frame
   frame_id: left_camera_optical_frame
-  camera_sn: 00L28498191
+  camera_sn: 00J90630586
   frame_rate: 1000
   exposure_auto: false
   exposure_value: 1600
